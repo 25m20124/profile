@@ -1,5 +1,70 @@
-추리하세요.  
-        힌트는 단 1회만 사용할 수 있습니다.
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>숭례문 프로파일링</title>
+
+<style>
+body {
+    margin: 0;
+    background-color: #0f0f0f;
+    color: #eaeaea;
+    font-family: Arial, sans-serif;
+}
+
+#chat {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    padding-bottom: 120px;
+}
+
+.message {
+    margin: 12px 0;
+    line-height: 1.6;
+}
+
+.user {
+    text-align: right;
+    color: #9cdcfe;
+}
+
+.bot {
+    text-align: left;
+    color: #d4d4d4;
+}
+
+#inputBox {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #111;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+input {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    margin-left: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="chat">
+    <div class="message bot">
+        🕵️ 사건 개요<br>
+        밤 12시 25분, 숭례문에서 화재가 발생했습니다.<br>
+        질문을 통해 단서를 수집하고 범인을 추리하세요.<br>
+        힌트는 단 <b>1회</b>만 사용할 수 있습니다.
     </div>
 </div>
 
@@ -30,29 +95,28 @@ function send() {
     input.value = "";
 
     let answer = "그 질문에 해당하는 단서는 확인되지 않았습니다.";
-
     const lower = q.toLowerCase();
 
     if (lower.includes("시간") || lower.includes("언제")) {
         answer = "사건은 밤 12시 25분에 발생했습니다.";
     }
     else if (lower.includes("장소") || lower.includes("숭례문")) {
-        answer = "사건 장소는 숭례문이며, 일반인의 접근이 쉽지 않은 구조입니다.";
+        answer = "사건 장소는 숭례문이며, 내부 구조를 아는 사람이 접근하기 유리합니다.";
     }
     else if (lower.includes("접근") || lower.includes("사다리")) {
-        answer = "범인은 사다리를 이용해 몰래 접근한 것으로 보입니다.";
+        answer = "범인은 사다리를 이용해 몰래 침입한 것으로 보입니다.";
     }
     else if (lower.includes("동기") || lower.includes("분노")) {
-        answer = "일부 용의자는 문화재 관리 시스템에 대해 강한 불만을 가지고 있었습니다.";
+        answer = "일부 용의자는 문화재 관리 시스템에 강한 불만을 가지고 있었습니다.";
     }
     else if (lower.includes("문자") || lower.includes("메시지")) {
-        answer = "사건 전 감정적으로 불안한 내용의 문자가 존재합니다.";
+        answer = "사건 전 감정적으로 격한 표현이 담긴 문자가 확인됩니다.";
     }
     else if (lower.includes("cctv") || lower.includes("택시") || lower.includes("동선")) {
-        answer = "사건 직전 숭례문 인근에서 수상한 이동 동선이 포착되었습니다.";
+        answer = "사건 전후로 수상한 이동 동선이 CCTV에 포착되었습니다.";
     }
-    else if (lower.includes("전문") || lower.includes("소방") || lower.includes("불")) {
-        answer = "범인은 화재와 방재 시스템에 대한 지식을 갖고 있었을 가능성이 있습니다.";
+    else if (lower.includes("소방") || lower.includes("전문") || lower.includes("불")) {
+        answer = "범인은 화재와 방재 시스템에 대한 이해가 있었을 가능성이 있습니다.";
     }
 
     addMessage(answer, "bot");
@@ -65,7 +129,7 @@ function useHint() {
     }
     hintUsed = true;
     addMessage(
-        "힌트: 아직 확인하지 않은 단서의 범주가 있을 수 있습니다. 질문의 방향을 바꿔보세요.",
+        "힌트: 아직 질문하지 않은 단서의 범주가 남아 있을 수 있습니다.",
         "bot"
     );
 }
@@ -73,3 +137,4 @@ function useHint() {
 
 </body>
 </html>
+
